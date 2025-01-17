@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -156,24 +190,82 @@ ul.task-list li input[type="checkbox"] {
 
 <p>During my time as a Data Analyst at a startup company, SQL was an essential tool to extract the data to measure key metrics such as product growth, customer churn over time, revenue trends, and deal success rates. For over three years, not a single day passed without writing SQL queries. In the data science field, I noticed that SQL is one of the requirements in the job description. Here, I’ll share some essential SQL techniques that a data professional should master.</p>
 <p><img src="thumbnail.jpg" class="img-fluid"></p>
-<p>Mastering Joins Joins are the fundatamental topic to combine multiple tables. It’s important to understand clearly to apply different types of joins based on the stakeholders’ request or requirements. Among different joins, LEFT JOIN and INNER JOIN were the ones I used most frequently. When to use each type of join: INNER JOIN: Use when we want to extract the matching data in both tables. LEFT JOIN: Use when we want all of the records from the first table based on the matched records from the second table Here’s a quick example for those two joins.</p>
-<p>SELECT c.customer_id, c.customer_name, o.order_id, o.order_date, o.order_amount FROM customers as c LEFT JOIN orders as o ON c.customer_id = o.customer_id;</p>
+<section id="mastering-joins" class="level4">
+<h4 class="anchored" data-anchor-id="mastering-joins">Mastering Joins</h4>
+<p>Joins are the fundatamental topic to combine multiple tables. It’s important to understand clearly to apply different types of joins based on the stakeholders’ request or requirements. Among different joins, LEFT JOIN and INNER JOIN were the ones I used most frequently. When to use each type of join: INNER JOIN: Use when we want to extract the matching data in both tables. LEFT JOIN: Use when we want all of the records from the first table based on the matched records from the second table Here’s a quick example for those two joins.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.customer_id, c.customer_name, o.order_id, o.order_date, o.order_amount</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> customers <span class="kw">as</span> c</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> orders <span class="kw">as</span> o </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> c.customer_id <span class="op">=</span> o.customer_id;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This query will retrieve all the customers from the customers table, including the customers without any orders.</p>
-<p>SELECT c.customer_id, c.customer_name, o.order_id, o.order_date, o.order_amount FROM customers as c INNER JOIN orders as o ON c.customer_id = o.customer_id; This query will retrieve only the customers who had orders.</p>
-<p>Using CASE WHEN for Conditional Logic The CASE WHEN statement is used to segment or categorize the data. Before we use this, there are a few conditions to consider to make sure that the logic is aligned with stakeholders because this categorization will lead to wrong directions.<br>
-Let’s say we want to segment companies based on the number of employees they had: SELECT company_name, CASE WHEN employees &gt;= 500 THEN ‘Large’ WHEN employees BETWEEN 100 AND 499 THEN ‘Medium’ ELSE ‘Small’ END AS company_size FROM companies;</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.customer_id, c.customer_name, o.order_id, o.order_date, o.order_amount </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> customers <span class="kw">as</span> c</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> orders <span class="kw">as</span> o </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> c.customer_id <span class="op">=</span> o.customer_id;</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>This <span class="kw">query</span> will retrieve <span class="kw">only</span> <span class="kw">the</span> customers who had orders. </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="using-case-when-for-conditional-logic" class="level4">
+<h4 class="anchored" data-anchor-id="using-case-when-for-conditional-logic">Using CASE WHEN for Conditional Logic</h4>
+<p>The CASE WHEN statement is used to segment or categorize the data. Before we use this, there are a few conditions to consider to make sure that the logic is aligned with stakeholders because this categorization will lead to wrong directions.<br>
+Let’s say we want to segment companies based on the number of employees they had:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> company_name,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="cf">CASE</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> employees <span class="op">&gt;=</span> <span class="dv">500</span> <span class="cf">THEN</span> <span class="st">'Large'</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> employees <span class="kw">BETWEEN</span> <span class="dv">100</span> <span class="kw">AND</span> <span class="dv">499</span> <span class="cf">THEN</span> <span class="st">'Medium'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>           <span class="cf">ELSE</span> <span class="st">'Small'</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span> <span class="kw">AS</span> company_size</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> companies;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This query will segment the companies’ size which will help us to do further analysis.</p>
-<p>Leveraging Aggregate Functions Aggregate functions are essential for summarizing data - for example we want to extract the customer’s usage data over time, whether weekly, monthly, or annually. Let’s suppose our stakeholders request a dashboard showing product usage hours over different time frames. SELECT customer_id, DATE_TRUNC(‘month’, usage_timestamp) AS month, SUM(usage_hours) AS total_usage FROM product_usage GROUP BY customer_id, month;</p>
-<p>Before we extract the data over time, we need to convert the timestamp first to the time that we want to apply in the dashboard. All the data that is related with time in our product_usage table is stored as a timestamp. Therefore, we need to master the data type conversion as well. Data Type Conversion Converting data types is often necessary for analysis. Before we convert the data, we should understand well about the input format of our data and what we want as the output. Data type conversion is common when we extract the data from our database. Here is the same concept as the previous example. We want the product usage date to do analysis.</p>
-<p>SELECT customer_id, CAST(usage_timestamp AS DATE) AS usage_date FROM product_usage;</p>
-<p>Common Table Expressions (CTEs) When we deal with complex queries, CTEs will allow us to make our SQL queries more readable and easy to manage. In my opinion, the reasons behind using CTEs are to break down the complex queries into simple queries and to use the results within the same queries. Let’s say we need to join two tables first, then combine the result with another dataset. Here’s an example: WITH customer_orders AS ( SELECT customer_id, COUNT(order_id) AS total_orders, SUM(amount) as total_amount FROM orders GROUP BY customer_id ), customer_details AS ( SELECT ci.customer_id, ci.tier_level, s.segment_level FROM customer_info as ci LEFT JOIN customer_segments s ON ci.customer_id = s.customer_id )</p>
-<p>SELECT a.customer_id, a.total_orders, total_amount, tier_level, segment_level FROM customer_orders a JOIN customer_details b ON a.customer_id = b.customer_id;</p>
+<p>Leveraging Aggregate Functions Aggregate functions are essential for summarizing data - for example we want to extract the customer’s usage data over time, whether weekly, monthly, or annually. Let’s suppose our stakeholders request a dashboard showing product usage hours over different time frames.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> customer_id,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       DATE_TRUNC(<span class="st">'month'</span>, usage_timestamp) <span class="kw">AS</span> <span class="dt">month</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(usage_hours) <span class="kw">AS</span> total_usage</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> product_usage</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> customer_id, <span class="dt">month</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Before we extract the data over time, we need to convert the timestamp first to the time that we want to apply in the dashboard. All the data that is related with time in our product_usage table is stored as a timestamp. Therefore, we need to master the data type conversion as well.</p>
+</section>
+<section id="data-type-conversion" class="level4">
+<h4 class="anchored" data-anchor-id="data-type-conversion">Data Type Conversion</h4>
+<p>Converting data types is often necessary for analysis. Before we convert the data, we should understand well about the input format of our data and what we want as the output. Data type conversion is common when we extract the data from our database. Here is the same concept as the previous example. We want the product usage date to do analysis.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> customer_id, <span class="fu">CAST</span>(usage_timestamp <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="kw">AS</span> usage_date</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> product_usage;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="common-table-expressions-ctes" class="level4">
+<h4 class="anchored" data-anchor-id="common-table-expressions-ctes">Common Table Expressions (CTEs)</h4>
+<p>When we deal with complex queries, CTEs will allow us to make our SQL queries more readable and easy to manage. In my opinion, the reasons behind using CTEs are to break down the complex queries into simple queries and to use the results within the same queries. Let’s say we need to join two tables first, then combine the result with another dataset. Here’s an example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> customer_orders <span class="kw">AS</span> (</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> customer_id, <span class="fu">COUNT</span>(order_id) <span class="kw">AS</span> total_orders, <span class="fu">SUM</span>(amount) <span class="kw">as</span> total_amount</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> orders</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> customer_id</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>customer_details <span class="kw">AS</span> ( </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ci.customer_id, ci.tier_level, s.segment_level </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> customer_info <span class="kw">as</span> ci</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> customer_segments s </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> ci.customer_id <span class="op">=</span> s.customer_id )</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> a.customer_id, a.total_orders, total_amount, tier_level, segment_level</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> customer_orders a</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> customer_details b <span class="kw">ON</span> a.customer_id <span class="op">=</span> b.customer_id;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We can use multiple joins in the first transactions in customer_orders. But it’ll mix with customer_orders data and customer_details info. If the query is too complex, it’s not easy to trace what’s wrong. Therefore, we split two steps - customer_orders and customer_details.</p>
-<p>Applying Window Functions Window functions are powerful to do the complex computations such as comparing monthly profits or ranking customers. As an example, we want to get the moving averages or the comparisons within the tier level or we need to set the ranks across the countries. Let’s write the query to compare monthly profits: SELECT month, profit, LAG(profit) OVER (ORDER BY month) AS previous_month_profit, profit - LAG(profit) OVER (ORDER BY month) AS profit_change FROM monthly_revenue;</p>
-<p>Another example - to rank customers by deal size within each country: SELECT customer_id, country, deal_size, RANK() OVER (PARTITION BY country ORDER BY deal_size DESC) AS rank FROM deals;</p>
+</section>
+<section id="applying-window-functions" class="level4">
+<h4 class="anchored" data-anchor-id="applying-window-functions">Applying Window Functions</h4>
+<p>Window functions are powerful to do the complex computations such as comparing monthly profits or ranking customers. As an example, we want to get the moving averages or the comparisons within the tier level or we need to set the ranks across the countries. Let’s write the query to compare monthly profits:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dt">month</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       profit,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">LAG</span>(profit) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">month</span>) <span class="kw">AS</span> previous_month_profit,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>       profit <span class="op">-</span> <span class="fu">LAG</span>(profit) <span class="kw">OVER</span> (<span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">month</span>) <span class="kw">AS</span> profit_change</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> monthly_revenue;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Another example - to rank customers by deal size within each country:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> customer_id, country, deal_size,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">RANK</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> country <span class="kw">ORDER</span> <span class="kw">BY</span> deal_size <span class="kw">DESC</span>) <span class="kw">AS</span> <span class="fu">rank</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> deals;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In my opinion, SQL is more than using it as a query language. We can use it for data extraction, data transformation, and data analysis etc. Using it, we can answer all types of questions and deliver the results to the stakeholders to make effective decisions. Therefore, I believe SQL skill is a must-have for all data professionals.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
