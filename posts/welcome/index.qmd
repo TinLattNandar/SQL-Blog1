@@ -9,7 +9,7 @@ During my time as a Data Analyst at a startup company, SQL was an essential tool
 
 ![](thumbnail.jpg)
 
-#### Mastering Joins
+#### ** Mastering Joins **
 Joins are the fundatamental topic to combine multiple tables. It's important to understand clearly to apply different types of joins based on the stakeholders' request or requirements. Among different joins, **LEFT JOIN** and **INNER JOIN** were the ones I used most frequently.
 
 When to use each type of join:
@@ -35,8 +35,9 @@ ON c.customer_id = o.customer_id;
 This query will retrieve only the customers who had orders. 
 ```
 
-#### Using CASE WHEN for Conditional Logic
+#### ** Using CASE WHEN for Conditional Logic **
 The CASE WHEN statement is used to segment or categorize the data. Before we use this, there are a few conditions to consider to make sure that the logic is aligned with stakeholders because this categorization will lead to wrong directions.   
+
 Let's say we want to segment companies based on the number of employees they had: 
 
 ``` sql
@@ -51,8 +52,9 @@ FROM companies;
 
 This query will segment the companies' size which will help us to do further analysis. 
 
-Leveraging Aggregate Functions
+#### ** Leveraging Aggregate Functions **
 Aggregate functions are essential for summarizing data - for example we want to extract the customer's usage data over time, whether weekly, monthly, or annually.
+
 Let's suppose our stakeholders request a dashboard showing product usage hours over different time frames. 
 
 ``` sql
@@ -65,8 +67,9 @@ GROUP BY customer_id, month;
 
 Before we extract the data over time, we need to convert the timestamp first to the time that we want to apply in the dashboard. All the data that is related with time in our product_usage table is stored as a timestamp. Therefore, we need to master the data type conversion as well. 
 
-#### Data Type Conversion
+#### ** Data Type Conversion **
 Converting data types is often necessary for analysis. Before we convert the data, we should understand well about the input format of our data and what we want as the output. Data type conversion is common when we extract the data from our database. 
+
 Here is the same concept as the previous example. We want the product usage date to do analysis. 
 
 ``` sql
@@ -74,8 +77,9 @@ SELECT customer_id, CAST(usage_timestamp AS DATE) AS usage_date
 FROM product_usage;
 ```
 
-#### Common Table Expressions (CTEs)
+#### ** Common Table Expressions (CTEs)**
 When we deal with complex queries, CTEs will allow us to make our SQL queries more readable and easy to manage. In my opinion, the reasons behind using CTEs are to break down the complex queries into simple queries and to use the results within the same queries. 
+
 Let's say we need to join two tables first, then combine the result with another dataset. Here’s an example:
 
 ``` sql
@@ -90,7 +94,6 @@ FROM customer_info as ci
 LEFT JOIN customer_segments s 
 ON ci.customer_id = s.customer_id )
 
-
 SELECT a.customer_id, a.total_orders, total_amount, tier_level, segment_level
 FROM customer_orders a
 JOIN customer_details b ON a.customer_id = b.customer_id;
@@ -99,8 +102,9 @@ JOIN customer_details b ON a.customer_id = b.customer_id;
 
 We can use multiple joins in the first transactions in customer_orders. But it'll mix with customer_orders data and customer_details info. If the query is too complex, it's not easy to trace what's wrong. Therefore, we split two steps - customer_orders and customer_details.
 
-#### Applying Window Functions
+#### ** Applying Window Functions **
 Window functions are powerful to do the complex computations such as comparing monthly profits or ranking customers. As an example, we want to get the moving averages or the comparisons within the tier level or we need to set the ranks across the countries. 
+
 Let's write the query to compare monthly profits:
 
 ``` sql
