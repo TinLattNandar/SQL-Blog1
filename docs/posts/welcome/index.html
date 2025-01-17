@@ -193,7 +193,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="mastering-joins" class="level4">
 <h4 class="anchored" data-anchor-id="mastering-joins"><strong>Mastering Joins</strong></h4>
 <p>Joins are the fundatamental topic to combine multiple tables. It’s important to understand clearly to apply different types of joins based on the stakeholders’ request or requirements. Among different joins, <strong>LEFT JOIN</strong> and <strong>INNER JOIN</strong> were the ones I used most frequently.</p>
-<p>When to use each type of join: - INNER JOIN: Use when we want to extract the matching data in both tables. - LEFT JOIN: Use when we want all of the records from the first table based on the matched records from the second table</p>
+<p>When to use each type of join:</p>
+<ul>
+<li><strong>INNER JOIN</strong>: Use when we want to extract the matching data in both tables.</li>
+<li><strong>LEFT JOIN</strong>: Use when we want all of the records from the first table based on the matched records from the second table</li>
+</ul>
 <p>Here’s a quick example for those two joins.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.customer_id, c.customer_name, o.order_id, o.order_date, o.order_amount</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> customers <span class="kw">as</span> c</span>
