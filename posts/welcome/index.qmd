@@ -10,10 +10,12 @@ During my time as a Data Analyst at a startup company, SQL was an essential tool
 ![](thumbnail.jpg)
 
 #### Mastering Joins
-Joins are the fundatamental topic to combine multiple tables. It's important to understand clearly to apply different types of joins based on the stakeholders' request or requirements. Among different joins, LEFT JOIN and INNER JOIN were the ones I used most frequently.
+Joins are the fundatamental topic to combine multiple tables. It's important to understand clearly to apply different types of joins based on the stakeholders' request or requirements. Among different joins, **LEFT JOIN** and **INNER JOIN** were the ones I used most frequently.
+
 When to use each type of join:
-INNER JOIN: Use when we want to extract the matching data in both tables. 
-LEFT JOIN: Use when we want all of the records from the first table based on the matched records from the second table
+* INNER JOIN: Use when we want to extract the matching data in both tables. 
+* LEFT JOIN: Use when we want all of the records from the first table based on the matched records from the second table
+
 Here's a quick example for those two joins. 
 
 ```sql
