@@ -7,7 +7,7 @@ categories: [news]
 
 During my time as a Data Analyst at a startup company, SQL was an essential tool to extract the  data to measure key metrics such as product growth, customer churn over time, revenue trends, and deal success rates. For over three years, not a single day passed without writing SQL queries. In the data science field, I noticed that SQL is one of the requirements in the job description. Here, I’ll share some essential SQL techniques that a data professional should master.
 
-![](thumbnail.jpg)
+![](SQL.png)
 
 #### **Mastering Joins**
 Joins are the fundatamental topic to combine multiple tables. It's important to understand clearly to apply different types of joins based on the stakeholders' request or requirements. Among different joins, **LEFT JOIN** and **INNER JOIN** were the ones I used most frequently.
